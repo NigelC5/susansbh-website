@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Portal</title>
+</head>
+<body>
+    <h1>Payment Portal</h1>
+    <p>Amount Due: PHP {{ amount_due }}</p>
+    
+    <h2>Pay via GCash</h2>
+    <img src="{{ qr_path }}" alt="GCash QR Code" style="width:200px; height:auto;">
+    
+    <h2>Upload Receipt</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="receipt">Select Receipt:</label>
+        <input type="file" name="receipt" required>
+        
+        <label for="reference_number">Reference Number:</label>
+        <input type="text" name="reference_number" required>
+        
+        <button type="submit">Submit Payment</button>
+    </form>
+</body>
+</html>

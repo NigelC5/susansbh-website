@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar Menu for Admin Dashboard | CodingNepal</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <a href="#" class="logo">CodingLab</a>
+
+      <div class="menu-content">
+        <ul class="menu-items">
+
+          <li class="item">
+            <a href="index.php?page=home">Dashboard</a>
+          </li>
+
+          <li class="item">
+            <div class="submenu-item">
+              <span>Rooms</span>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+            <ul class="menu-items submenu">
+              <div class="menu-title">
+                <i class="fa-solid fa-chevron-left"></i>
+                Rooms
+              </div>
+              <li class="item">
+                <a href="index.php?page=add_room">Add Room</a>
+              </li>
+              <li class="item">
+                <a href="index.php?page=view_room">View Room</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="item">
+            <a href="index.php?page=tenants">Tenants</a>
+          </li>
+
+          <li class="item">
+            <a href="index.php?page=invoices">Payments</a>
+          </li>
+
+          <li class="item">
+            <a href="index.php?page=balance_report">Outstanding Balance</a>
+          </li>
+
+          <li class="item">
+            <a href="index.php?page=payment_report">Income Report</a>
+          </li>
+
+          <li class="item">
+            <a href="index.php?page=users">Users</a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar">
+      <i class="fa-solid fa-bars" id="sidebar-close"></i>
+    </nav>
+
+    <main class="main">
+      <h1>Admin Dashboard Content</h1>
+    </main>
+
+  </body>
+  <script>
+    const sidebar = document.querySelector(".sidebar");
+const sidebarClose = document.querySelector("#sidebar-close");
+const menu = document.querySelector(".menu-content");
+const menuItems = document.querySelectorAll(".submenu-item");
+const subMenuTitles = document.querySelectorAll(".submenu .menu-title");
+
+sidebarClose.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    menu.classList.add("submenu-active");
+    item.classList.add("show-submenu");
+    menuItems.forEach((item2, index2) => {
+      if (index !== index2) {
+        item2.classList.remove("show-submenu");
+      }
+    });
+  });
+});
+
+subMenuTitles.forEach((title) => {
+  title.addEventListener("click", () => {
+    menu.classList.remove("submenu-active");
+  });
+});
+  </script>
+</html>
