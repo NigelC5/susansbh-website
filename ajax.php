@@ -1,27 +1,32 @@
 <?php
 ob_start();
 $action = $_GET['action'];
-include 'admin_class.php';
-$crud = new Action();
+include 'admin_class.php'; // Assuming the login logic is in the 'Action' class
+
+$crud = new Action(); // Instantiate the Action class
+
 if($action == 'login'){
-	$login = $crud->login();
-	if($login)
-		echo $login;
+    $login = $crud->login();
+    if($login)
+        echo $login; // Should return 1 on success or appropriate message on failure
 }
+
 if($action == 'login2'){
-	$login = $crud->login2();
-	if($login)
-		echo $login;
+    $login = $crud->login2();
+    if($login)
+        echo $login;
 }
+
 if($action == 'logout'){
-	$logout = $crud->logout();
-	if($logout)
-		echo $logout;
+    $logout = $crud->logout();
+    if($logout)
+        echo $logout;
 }
+
 if($action == 'logout2'){
-	$logout = $crud->logout2();
-	if($logout)
-		echo $logout;
+    $logout = $crud->logout2();
+    if($logout)
+        echo $logout;
 }
 if($action == 'save_user'){
 	$save = $crud->save_user();
