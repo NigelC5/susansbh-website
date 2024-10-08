@@ -2,18 +2,20 @@
 <html lang="en">
 
 <?php 
+    session_start(); 
     include('./login_logic.php'); // Include the new PHP file
 ?>
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title><?php echo $_SESSION['system']['name']; ?></title>
+    <title><?php echo isset($_SESSION['system']['name']) ? $_SESSION['system']['name'] : 'Login'; ?></title>
     <?php include('./header.php'); ?>
     
     <?php 
         if (isset($_SESSION['login_id'])) {
             header("location:index.php?page=home");
+            exit();
         }
     ?>
     <!-- Font Awesome for icons -->
@@ -21,7 +23,6 @@
 </head>
 
 <style>
-    /* Your existing styles here */
     body {
         margin: 0;
         padding: 0;
@@ -35,7 +36,6 @@
         align-items: center;
     }
 
-    /* Container for the entire login section */
     .login-container {
         display: flex;
         background: rgba(0, 0, 0, 0.6); /* Slight dark overlay on background */
@@ -46,7 +46,6 @@
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
     }
 
-    /* Left section for the welcome message */
     .welcome-section {
         width: 50%;
         padding: 50px;
@@ -68,7 +67,6 @@
         line-height: 1.6;
     }
 
-    /* Right section for the login form */
     .login-form-section {
         width: 50%;
         padding: 50px;
@@ -121,7 +119,6 @@
         color: #34495e; /* Color of the icon */
     }
 
-    /* Styling for the sign-in button */
     .login-button {
         width: 100%;
         padding: 12px;
@@ -134,7 +131,7 @@
     }
 
     .login-button:hover {
-        background-color: rgba(255, 153, 0, 0.95); /* Darker red shade on hover */
+        background-color: rgba(255, 153, 0, 0.95); /* Darker shade on hover */
     }
 </style>
 
@@ -179,23 +176,23 @@
             $form.find('button[type="submit"]').attr('disabled', true).text('Logging in...');
 
             $.ajax({
-        url: 'ajax.php?action=login', // Path to the login logic
-        method: 'POST',
-        data: $form.serialize(),
-        error: function(err) {
-            console.error(err);
-            $form.find('button[type="submit"]').removeAttr('disabled').text('Login');
-            $form.prepend('<div class="alert alert-danger">An error occurred. Please try again.</div>');
-        },
-        success: function(resp) {
-            if (resp == 1) {
-                window.location.href = 'index.php?page=home'; // Redirect on successful login
-            } else {
-                $form.prepend('<div class="alert alert-danger">Email or password is incorrect.</div>');
-                $form.find('button[type="submit"]').removeAttr('disabled').text('Login');
-            }
-        }
-    });
+                url: 'ajax.php?action=login',
+                method: 'POST',
+                data: $form.serialize(),
+                error: function(err) {
+                    console.error(err);
+                    $form.find('button[type="submit"]').removeAttr('disabled').text('Login');
+                    $form.prepend('<div class="alert alert-danger">An error occurred. Please try again.</div>');
+                },
+                success: function(resp) {
+                    if (resp == 1) {
+                        window.location.href = 'index.php?page=home'; // Redirect on successful login
+                    } else {
+                        $form.prepend('<div class="alert alert-danger">Email or password is incorrect.</div>');
+                        $form.find('button[type="submit"]').removeAttr('disabled').text('Login');
+                    }
+                }
+            });
         });
     </script>
 </body>
