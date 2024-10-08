@@ -14,7 +14,7 @@
     
     <?php 
         if (isset($_SESSION['login_id'])) {
-            header("location:index.php?page=home");
+            header("location:index1.html?page=home");
             exit();
         }
     ?>
@@ -186,7 +186,7 @@
                 },
                 success: function(resp) {
                     if (resp == 1) {
-                        window.location.href = 'index.php?page=home'; // Redirect on successful login
+                        window.location.href = 'index1.html?page=home'; // Redirect on successful login
                     } else {
                         $form.prepend('<div class="alert alert-danger">Email or password is incorrect.</div>');
                         $form.find('button[type="submit"]').removeAttr('disabled').text('Login');
